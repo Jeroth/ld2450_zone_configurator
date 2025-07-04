@@ -1,5 +1,5 @@
 {
-  "name": "ld2450_zone_configurator",
+  "name": "ld2450-zone-configurator",
   "version": "1.0.0",
   "dependencies": {
     "react": "^18.2.0",
