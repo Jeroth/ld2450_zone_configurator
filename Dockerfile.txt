@@ -1,0 +1,29 @@
+FROM python:3.9-slim
+
+# Install Node.js for React frontend
+RUN apt-get update && apt-get install -y nodejs npm
+
+# Set working directory
+WORKDIR /app
+
+# Copy backend requirements
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy backend
+COPY backend /app/backend
+
+# Copy and build frontend
+COPY frontend /app/frontend
+WORKDIR /app/frontend
+RUN npm install && npm run build
+
+# Copy run script
+COPY run.sh /app/run.sh
+RUN chmod +x /app/run.sh
+
+# Expose port
+EXPOSE 8000
+
+# Run the application
+CMD ["/app/run.sh"]
